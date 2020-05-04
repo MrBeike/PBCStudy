@@ -1,0 +1,103 @@
+--------------------------------微信API---------------------------------------------------
+#获取登录后相关信息（微信）
+https://api-pboc.pbcstu.cn/v1/weixin/tokens?random=0.8377993952053677
+
+--------------------------------网页API---------------------------------------------------
+
+#登录   已实现
+https://api-pboc.pbcstu.cn/v1/users/tokens?random=0.8895855527348618
+{"deviceId":"","isCheck":1,"nb":1,"password":"","userName":"","domainName":"www.pbcstu.cn"}
+
+
+#获取所有项目   已实现 
+https://api-pboc.pbcstu.cn/v1/mt/myprojects
+
+limit=10
+offset=0
+orgId=
+type=0
+status=1
+direction=DESC
+random=
+ 
+#获取用户主界面  已实现               
+https://api-pboc.pbcstu.cn/v1/sc/user/scheme?random=0.31345312714639706
+
+#获取系统通知  保留
+https://api-pboc.pbcstu.cn/v1/systemnotice/firstnotice?random=0.31345312714639706
+
+#获取用户界面底部菜单（中间为orgId） 保留
+https://api-pboc.pbcstu.cn/v1/orgs/e4bef87a-3cc8-4a12-9375-4a9996e487d8/toolBar?random=0.12460890701110994
+
+#获取用户相关信息（comment、msg?) 保留
+https://api-pboc.pbcstu.cn/v1/users/mycount?random=0.12460890701110994
+{
+	"favCount": 0,
+	"commentCount": 3,
+	"shareCount": 0,
+	"msgCount": 1
+}
+
+#获取具体项目 （中间为projectID 即program_response.json中的id） 目测多余
+https://api-pboc.pbcstu.cn/v1/mt/projects/4e2ae17c-446e-410a-92d9-9195646403a9?random=0.12460890701110994
+
+#获取项目具体课程列表 （中间为projectID 即program_response.json中的id) 已实现
+https://api-pboc.pbcstu.cn/v1/mt/projects/4e2ae17c-446e-410a-92d9-9195646403a9/myperiods?
+isNeedTask=1&checkMember=0&isApplyId=0&random=0.12460890701110994
+
+#获取课程子任务 （中间为courseID 即course_response.json中的id） 目测用处不大，需配合其他使用
+https://api-pboc.pbcstu.cn/v1/mt/tasks/668f74a3-fbc2-4f39-930c-e782f7aecc47?random=0.12460890701110994
+
+#获取课程简介  可以获取sourceId masterId
+https://api-pboc.pbcstu.cn/v1/knowledges/b7e6a018-e890-4620-8783-92f29e4acf7f?
+studyPlanId=&random=0.12460890701110994
+
+
+
+#获取课程子任务详情（课程子任务列表）（中间为sourceId）
+https://api-pboc.pbcstu.cn/v1/subknowledges/224d9303-e391-4069-a3f6-a71fe0ade85d?
+masterId=2f02f3b1-bc21-4d95-a33e-8a429701ff52&random=0.12460890701110994
+
+
+https://api-pboc.pbcstu.cn/v1/knowledge/fc3fc3b0-28c1-4ffe-9f1b-624d03d53f84?random=0.8101321681854676
+
+json = {
+	"sourceType": "SingleStudy",
+	"packageId": "224d9303-e391-4069-a3f6-a71fe0ade85d",   #其实就是sourceId
+	"planId": ""
+}
+
+
+
+测试API
+#试题简介
+https://api-pboc.pbcstu.cn/v1/ote/web/examarrange/1a8c84ac-5e02-4bd2-8bff-383bbaf44b67/preview?
+packageId=ede48766-cf9b-47cd-a4cc-cb8dbe31571a&userExamMapId=37c3c97b-4653-40f3-a6a0-029be68af733&examType=MixedTraining&masterId=&random=0.41462253426695983
+
+#具体试题（id,knowledgeId
+https://api-pboc.pbcstu.cn/v1/ote/web/examarrange/1a8c84ac-5e02-4bd2-8bff-383bbaf44b67/userexammap/37c3c97b-4653-40f3-a6a0-029be68af733/start?
+&random=0.41462253426695983
+
+#最后提交（userExamId）
+https://api-pboc.pbcstu.cn/v1/ote/web/userexam/5dca57eb-4758-4498-a630-6d2c62e3fd7b/submit?arrangeId=1a8c84ac-5e02-4bd2-8bff-383bbaf44b67&userExamMapId=37c3c97b-4653-40f3-a6a0-029be68af733&random=0.41462253426695983
+
+#测试结果详情页
+https://api-pboc.pbcstu.cn/v1/ote/web/userexam/f32e0e72-ddfe-40b2-8882-24d752618298/statistics?arrangeId=4a807be0-60a5-4485-8189-f6101c4b0405&userExamMapId=&random=0.012986589893742795
+
+
+一站到底
+#一站到底首页（所有项目）
+https://api-pboc.pbcstu.cn/v1/ote/ga/index?r=0.04855217370510012 GET
+see ga_response.json   dict['totalLibs']
+
+#具体某个题库 {dict[index][id]}{pointList[index][id]}
+https://api-pboc.pbcstu.cn/v1/ote/ga/lib/1c78c11b-64f0-4a41-8fff-5983d8ad7978/point/82d67421-62de-43af-bc73-72dffb58df37?r=0.6899454945936659
+see library_response.json
+
+#具体某一层（题目合集）{dict[index][id]}{pointList[index][id]}
+https://api-pboc.pbcstu.cn/v1/ote/ga/lib/f4e42a9b-1a39-44f8-a475-50cc6a8c2d9d/point/e634481c-41e6-49ef-abd5-d379ccc07d23/floor/1?r=0.46887875695952086
+
+floorValue = dict['correctValue'] * dict['radixVlue'] * dict['questions']._len_ + dict['allCorrectValue']
+
+#提交答案 
+https://api-pboc.pbcstu.cn/v1/ote/ga/lib/1c78c11b-64f0-4a41-8fff-5983d8ad7978/point/82d67421-62de-43af-bc73-72dffb58df37?r=0.4546375124187899
