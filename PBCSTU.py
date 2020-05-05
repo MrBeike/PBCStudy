@@ -50,7 +50,6 @@ class PBCSTU:
             user_info_dict = json.loads(user_info_json)
             keys = ['token','userId','fullName','departmentName','openId']
             self.store = dictPicker(self.store, user_info_dict,*keys)
-            print(self.store)
         else:
             user_info_dict = False
         return user_info_dict
@@ -238,7 +237,6 @@ class PBCSTU:
                         "submitType": 0,
                         "uniqueId": uniqueId
                         }
-                    print(exams_answer)
                     exam_submit_url = f'https://api-pboc.pbcstu.cn/v1/ote/web/userexam/{userExamId}/submit?arrangeId={arrangeId}&userExamMapId={userExamMapId}&random={random.random()}'
                     exam_submit_page = self.s.post(exam_submit_url,json=exams_answer)
                     # 204 No Content

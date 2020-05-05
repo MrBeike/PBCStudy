@@ -1,16 +1,24 @@
 # PBCStudy
 
-> a tool for learner on [www.pbcstu.cn](http://www.pbcstu.cn), may also works on other website which use yunxuetang technology.
+> 如同[webCourse](https://github.com/MrBeike/WebCourse-QTGUI)，PBCStudy只是又一款学习辅助脚本罢了。
 
-## 如果你觉得OK,可以赞赏作者
+
+## 如果你觉得OK,可以赞赏作者.
 <img src='/tips.jpg'>
 
 
 ## 使用指南
+    - 使用源码
+        1.下载源码:git clone https://github.com/MrBeike/WebCourse-QTGUI.git
+        2.运行Demo:python launcher.py
+    - 体验可执行文件
+        1.提供一个测试用文件。[条件有限，暂时只提供在windows 7 64bit上打包的Demo]
+        [百度网盘](https://pan.baidu.com/s/1afhx12Ky6Aa4Fqcnou20rQ) 提取码: p9sf
+        
    - launcher.py是一个简单的Demo,可完成单个知识点的学习。
    - PBCSTU.py 为学习系统相关API接口。
    - 功能丰富和界面开发过段时间吧。
-   - 欢迎Fork、 pull request、二次开发，请遵守法律法规及开源协议。
+   - 欢迎Fork | pull request | whatever you like，请遵守法律法规及开源协议。
     
 
 ## 主要功能
@@ -30,11 +38,11 @@
 
     学习流程：登录(login)->获取所有项目(getProgram)->获取单个项目(getproject)->获取单个章节(getChapter)->获取单个知识点(getKnowledge)
 
-## 佛系青年
+<!-- ## 佛系青年
                 春梦随云散
                 飞花逐水流
                 寄言众儿女
                 何必觅闲愁
 
     Hope you get your own happines,sincerely.
-    I know it's hard, but it worths.
+    Cause I know it's hard, but it worths. -->
