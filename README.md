@@ -1,5 +1,8 @@
 # PBCStudy
 
+[![](https://img.shields.io/badge/python-3-brightgreen.svg)](https://www.python.org/downloads/)
+[![](https://img.shields.io/badge/license-GPL3.0-red.svg)](LICENSE)
+
 > 如同[webCourse](https://github.com/MrBeike/WebCourse-QTGUI)，PBCStudy只是又一款学习辅助脚本罢了。
 
 
