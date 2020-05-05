@@ -43,11 +43,11 @@
     
     学习流程：登录(login)->获取所有项目(getProgram)->获取单个项目(getproject)->获取单个章节(getChapter)->获取单个知识点(getKnowledge)
 
-<!-- ## 佛系青年
+## 佛系青年
                 春梦随云散
                 飞花逐水流
                 寄言众儿女
                 何必觅闲愁
 
     Hope you get your own happines,sincerely.
-    Cause I know it's hard, but it worths. -->
+    Cause I know it's hard, but it worths.
