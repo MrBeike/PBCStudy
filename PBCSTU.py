@@ -197,12 +197,12 @@ class PBCSTU:
                     exam_info_json = exam_page.content.decode('utf-8')
                     # see file exam_response.json
                     exam_info_dict = json.loads(exam_info_json)
-                     # 获取相关键值,构建post包
+                    # 获取相关键值,构建post包
                     userExamId =  exam_info_dict['userExamId']
                     arrangeId =  exam_info_dict['arrangeId']
                     userExamMapId =  exam_info_dict['userExamMapId']
                     uniqueId =  exam_info_dict['uniqueId']
-                    # 判断是否限时
+                    # 判断是否限时 
                     isControlTime = exam_info_dict['isControlTime']
                     duration =  exam_info_dict['duration']
                     # 解析答案，构建post包
@@ -226,7 +226,7 @@ class PBCSTU:
                             "attach": []
                         }
                         answers.append(answer_dict)
-                    # 判断是否限时? duration:200
+                    # 判断是否限时? duration:200 (0为不限时，1为限时。200是10题大概的用时。)
                     if isControlTime == 0:
                         duration = 200
                     usedTime = random.randint(duration/2,duration)
