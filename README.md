@@ -6,6 +6,8 @@
 > 如同[webCourse](https://github.com/MrBeike/WebCourse-QTGUI)，PBCStudy只是又一款学习辅助脚本罢了。
 > webCourse 负责内网，PBCStudy 负责外网。
 
+## Changelog
+>2020年5月7日  修改了试题获取逻辑，解决了部分用户获取考试试题错误的bug.(感谢小丰同学反馈)
 
 ## 如果你觉得OK,可以赞赏作者.
 <img src='/tips.jpg'>
