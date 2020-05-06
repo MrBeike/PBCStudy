@@ -151,7 +151,8 @@ class PBCSTU:
         userKnowledgeId = the_knowledge['userKnowledgeId']
         file_type = the_knowledge['fileType']  # 暂时收集到[Video,OteExam]
         status = the_knowledge['status'] # 暂时收集到[NoStart,Studying，Completed]
-        if status != 'Completed':
+        # if status != 'Completed':
+        if True:
             if file_type == 'Video':
                 video_url = f'https://api-pboc.pbcstu.cn/v1/knowledge/{knowledge_id}?random={random.random()}'
                 video_json = {

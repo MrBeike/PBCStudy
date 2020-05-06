@@ -23,18 +23,12 @@ def workFlow(pbcstu):
 
 if __name__ == '__main__':
     pbcstu = PBCSTU()
-    warning = input('本脚本仅供python学习研究使用，请勿用于其他非法用途：我同意[Y],我拒绝[N]')
-    if warning.upper() == 'Y':
-        userName = input('请输入用户名（支持短号和身份证号码）： ')
-        password = input('请输入密码： ')
-        user_info = pbcstu.login(userName,password)
-        if user_info:
-            print(f"您正在以{user_info['departmentName']}【{user_info['fullName']}】的身份登录。")
-            while 1:
-                workFlow(pbcstu)
-        else: 
-            print("登录失败,请输入正确的用户名或密码。")
-    elif warning.upper() == 'N':
-        input('Have a good day')
-    else:
-        input('You see see you, one day day')
+    userName = input('请输入用户名（支持短号和身份证号码）： ')
+    password = input('请输入密码： ')
+    user_info = pbcstu.login(userName,password)
+    if user_info:
+        print(f"您正在以{user_info['departmentName']}【{user_info['fullName']}】的身份登录。")
+        while 1:
+            workFlow(pbcstu)
+    else: 
+        print("登录失败,请输入正确的用户名或密码。")
