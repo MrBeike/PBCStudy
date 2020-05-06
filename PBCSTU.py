@@ -148,7 +148,7 @@ class PBCSTU:
         '''
         the_knowledge = chapter_info_dict['datas'][index - 1]
         knowledge_id = the_knowledge['id']
-        userKnowledgeId = the_knowledge['userKnowledgeId']
+        # userKnowledgeId = the_knowledge['userKnowledgeId'] exam获取方式修改,拟弃用。
         file_type = the_knowledge['fileType']  # 暂时收集到[Video,OteExam]
         status = the_knowledge['status'] # 暂时收集到[NoStart,Studying，Completed]
         # if status != 'Completed':
@@ -190,10 +190,20 @@ class PBCSTU:
                         return False
                 else:
                     return study_page.content.decode('utf-8')
-                    
             elif file_type == 'OteExam':
-                exam_url = f'https://api-pboc.pbcstu.cn/v1/ote/web/examarrange/{knowledge_id}/userexammap/{userKnowledgeId}/start?&random={random.random()}'
+                # FIXME examType=MixedTraining?唯一固定值？
+                exam_preview_url = f'https://api-pboc.pbcstu.cn/v1/ote/web/examarrange/{knowledge_id}/preview?packageId={self.store["packageId"]}&userExamMapId=&examType=MixedTraining&masterId=&random={random.random()}'
+                exam_preview_page = self.s.get(exam_preview_url)
+                if exam_preview_page.status_code == 200:
+                    exam_preview_info_json = exam_preview_page.content.decode('utf-8')
+                    exam_preview_info_dict = json.loads(exam_preview_info_json)
+                    userExamMapId = exam_preview_info_dict['userExamMapId']
+                else:
+                    return exam_preview_page.content.decode('utf-8')
+                exam_url = f'https://api-pboc.pbcstu.cn/v1/ote/web/examarrange/{knowledge_id}/userexammap/{userExamMapId}/start?&random={random.random()}'
+                exam_page_option = self.s.options(exam_url)
                 exam_page = self.s.get(exam_url)
+                print(exam_page.status_code)
                 if exam_page.status_code == 200:
                     exam_info_json = exam_page.content.decode('utf-8')
                     # see file exam_response.json
