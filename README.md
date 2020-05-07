@@ -21,7 +21,7 @@
     
 - 体验可执行文件
 	- 1.提供一个测试用文件。条件有限，暂时只提供在windows 7 64bit上打包的Demo。
-	- 2.[百度网盘](https://pan.baidu.com/s/1afhx12Ky6Aa4Fqcnou20rQ) 提取码: p9sf
+	- 2.[github release](https://github.com/MrBeike/PBCStudy/releases)
 
 - 其他需要说明的
    - launcher.py是一个简单的Demo,可完成单个知识点的学习。
