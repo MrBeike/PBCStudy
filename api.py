@@ -11,7 +11,7 @@ Tips:
 学习流程：登录(login)->获取所有项目(getProgram)->获取单个项目(getproject)->获取单个章节(getChapter)->获取单个知识点(getKnowledge)[视频(video)测试(exam)]->学习(study)/测试(exam)
 '''
 
-class PBCSTU:
+class Study:
     def __init__(self):
         self.s = requests.session()
         self.store = {}
