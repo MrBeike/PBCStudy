@@ -30,7 +30,6 @@ class Study:
 
         # 获取登陆页面
         login_url = f'https://api-pboc.pbcstu.cn/v1/users/tokens?random={random.random()}'
-
         # password&userName为base64加密后的结果
         userName = base64.b64encode(userName.encode('utf-8')).decode('utf-8')
         password = base64.b64encode(password.encode('utf-8')).decode('utf-8')
@@ -62,7 +61,6 @@ class Study:
         # 获取token并写入headers
         token = self.store['token']
         self.s.headers.update({'token':token})
-
         # 获取用户注册的项目
         program_url = 'https://api-pboc.pbcstu.cn/v1/mt/myprojects'
         program_data = {

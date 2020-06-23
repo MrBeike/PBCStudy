@@ -7,8 +7,6 @@ import json
 import requests
 
 # FIXME 怎么让修改不返回就能生效 update?
-
-
 def dictPicker(storeDict, originDict, *keys):
     '''
     Pick useful key-value to a new dict.Kind like a temp store.
