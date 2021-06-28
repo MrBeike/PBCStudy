@@ -1,4 +1,4 @@
-# PBCStudy
+# StudyHelper
 
 [![](https://img.shields.io/badge/python-3-brightgreen.svg)](https://www.python.org/downloads/)
 [![](https://img.shields.io/badge/license-GPL3.0-red.svg)](LICENSE)
