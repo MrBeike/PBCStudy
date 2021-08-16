@@ -15,6 +15,7 @@ class Study:
     def __init__(self):
         self.s = requests.session()
         self.store = {}
+        self.base_url = "some secret url" # https://api.XX.cn/v1
 
     def login(self,userName,password):
         '''
@@ -29,7 +30,7 @@ class Study:
         }
 
         # 获取登陆页面
-        login_url = f'https://api-pboc.pbcstu.cn/v1/users/tokens?random={random.random()}'
+        login_url = f'{self.base_url}/users/tokens?random={random.random()}'
         # password&userName为base64加密后的结果
         userName = base64.b64encode(userName.encode('utf-8')).decode('utf-8')
         password = base64.b64encode(password.encode('utf-8')).decode('utf-8')
@@ -62,7 +63,7 @@ class Study:
         token = self.store['token']
         self.s.headers.update({'token':token})
         # 获取用户注册的项目
-        program_url = 'https://api-pboc.pbcstu.cn/v1/mt/myprojects'
+        program_url = f'{self.base_url}/mt/myprojects'
         program_data = {
                 'limit':'10',
                 'offset':'0',
@@ -90,7 +91,7 @@ class Study:
         '''
         the_project = program_info_dict['datas'][index - 1]
         project_id = the_project['id']
-        project_url = f'https://api-pboc.pbcstu.cn/v1/mt/projects/{project_id}/myperiods'
+        project_url = f'{self.base_url}/mt/projects/{project_id}/myperiods'
         project_data = {
             'isNeedTask':'1',
             'checkMember':'0',
@@ -116,7 +117,7 @@ class Study:
         # FIXME 这里的json构造又问题，没必要多一层。反馈。
         the_chapter = project_info_dict['datas'][0]['tasks'][index -1]
         relatedCourse = the_chapter['relatedCourse']
-        chapter_summary_url = f'https://api-pboc.pbcstu.cn/v1/knowledges/{relatedCourse}?studyPlanId=&random={random.random()}'
+        chapter_summary_url = f'{self.base_url}/knowledges/{relatedCourse}?studyPlanId=&random={random.random()}'
         chapter_summary_page = self.s.get(chapter_summary_url)
         if chapter_summary_page.status_code == 200:
             chapter_summary_json = chapter_summary_page.content.decode('utf-8')
@@ -125,7 +126,7 @@ class Study:
             sourceId = chapter_summary_dict['sourceId']
             masterID = chapter_summary_dict['masterId']
             self.store['packageId'] = sourceId
-            chapter_url = f'https://api-pboc.pbcstu.cn/v1/subknowledges/{sourceId}?masterId={masterID}&random={random.random()}'
+            chapter_url = f'{self.base_url}/subknowledges/{sourceId}?masterId={masterID}&random={random.random()}'
             chapter_page = self.s.get(chapter_url)
             if chapter_page.status_code == 200:
                 chapter_info_json = chapter_page.content.decode('utf-8')
@@ -151,7 +152,7 @@ class Study:
         status = the_knowledge['status'] # 暂时收集到[NoStart,Studying，Completed]
         if status != 'Completed':
             if file_type == 'Video':
-                video_url = f'https://api-pboc.pbcstu.cn/v1/knowledge/{knowledge_id}?random={random.random()}'
+                video_url = f'{self.base_url}/knowledge/{knowledge_id}?random={random.random()}'
                 video_json = {
                         "sourceType": "SingleStudy",
                         "packageId": self.store['packageId'],
@@ -179,7 +180,7 @@ class Study:
                         "Type": "1",  
                         "viewSchedule": viewSchedule
                     }
-                    study_url = f'https://api-pboc.pbcstu.cn/v1/study?random={random.random()}'
+                    study_url = f'{self.base_url}/study?random={random.random()}'
                     study_page = self.s.post(study_url,json=wx_study_json)
                     if study_page.status_code == 200:
                         return True
@@ -189,7 +190,7 @@ class Study:
                     return study_page.content.decode('utf-8')
             elif file_type == 'OteExam':
                 # FIXME examType=MixedTraining?唯一固定值？
-                exam_preview_url = f'https://api-pboc.pbcstu.cn/v1/ote/web/examarrange/{knowledge_id}/preview?packageId={self.store["packageId"]}&userExamMapId=&examType=MixedTraining&masterId=&random={random.random()}'
+                exam_preview_url = f'{self.base_url}/ote/web/examarrange/{knowledge_id}/preview?packageId={self.store["packageId"]}&userExamMapId=&examType=MixedTraining&masterId=&random={random.random()}'
                 exam_preview_page = self.s.get(exam_preview_url)
                 if exam_preview_page.status_code == 200:
                     exam_preview_info_json = exam_preview_page.content.decode('utf-8')
@@ -197,7 +198,7 @@ class Study:
                     userExamMapId = exam_preview_info_dict['userExamMapId']
                 else:
                     return exam_preview_page.content.decode('utf-8')
-                exam_url = f'https://api-pboc.pbcstu.cn/v1/ote/web/examarrange/{knowledge_id}/userexammap/{userExamMapId}/start?&random={random.random()}'
+                exam_url = f'{self.base_url}/ote/web/examarrange/{knowledge_id}/userexammap/{userExamMapId}/start?&random={random.random()}'
                 exam_page_option = self.s.options(exam_url)
                 exam_page = self.s.get(exam_url)
                 print(exam_page.status_code)
@@ -245,11 +246,11 @@ class Study:
                         "submitType": 0,
                         "uniqueId": uniqueId
                         }
-                    exam_submit_url = f'https://api-pboc.pbcstu.cn/v1/ote/web/userexam/{userExamId}/submit?arrangeId={arrangeId}&userExamMapId={userExamMapId}&random={random.random()}'
+                    exam_submit_url = f'{self.base_url}/ote/web/userexam/{userExamId}/submit?arrangeId={arrangeId}&userExamMapId={userExamMapId}&random={random.random()}'
                     exam_submit_page = self.s.post(exam_submit_url,json=exams_answer)
                     # 204 No Content
                     if exam_submit_page.status_code == 204:
-                        exam_result_url = f'https://api-pboc.pbcstu.cn/v1/ote/web/userexam/{userExamId}/statistics?arrangeId={arrangeId}&userExamMapId=&random={random.random()}'
+                        exam_result_url = f'{self.base_url}/ote/web/userexam/{userExamId}/statistics?arrangeId={arrangeId}&userExamMapId=&random={random.random()}'
                         exam_result_page = self.s.get(exam_result_url)
                         if exam_result_page.status_code == 200:
                             exam_result_info_json = exam_result_page.content.decode('utf-8')
